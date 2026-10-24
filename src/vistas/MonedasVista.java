@@ -8,20 +8,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 
 import datechooser.beans.DateChooserCombo;
+import modelos.CambioMoneda;
 
 public class MonedasVista extends JFrame {
 
@@ -117,6 +108,10 @@ public class MonedasVista extends JFrame {
 
     public void setCalcularEstadisticasClick(ActionListener evento) {
         btnCalcularEstadisticas.addActionListener(evento);
+    }
+
+    public void setMonedas(List<String> monedas) {
+        cmbMoneda.setModel(new DefaultComboBoxModel(monedas.toArray()));
     }
 
     // metodos publicos
