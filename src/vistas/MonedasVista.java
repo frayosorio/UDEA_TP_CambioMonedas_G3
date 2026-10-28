@@ -1,18 +1,19 @@
 package vistas;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 
 
 import datechooser.beans.DateChooserCombo;
 import modelos.CambioMoneda;
+import org.jfree.chart.ChartPanel;
 
 public class MonedasVista extends JFrame {
 
@@ -119,5 +120,28 @@ public class MonedasVista extends JFrame {
         if (posicion >= 0 && posicion < tpCambiosMoneda.getTabCount()) {
             tpCambiosMoneda.setSelectedIndex(posicion);
         }
+    }
+
+    public void graficar(ChartPanel pnlGraficador) {
+        pnlGrafica.removeAll();
+        pnlGrafica.setLayout(new BorderLayout());
+        pnlGrafica.add(pnlGraficador, BorderLayout.CENTER);
+        pnlGrafica.revalidate();
+    }
+
+    public void mostrarEstadisticas(Map<String, Double> estadisticas) {
+        pnlEstadisticas.removeAll();
+        pnlEstadisticas.setLayout(new GridBagLayout());
+        var gbc = new GridBagConstraints();
+        gbc.gridy = 0;
+        estadisticas.forEach((clave, valor) -> {
+            gbc.gridx = 0;
+            pnlEstadisticas.add(new JLabel(clave), gbc);
+            gbc.gridx = 1;
+            pnlEstadisticas.add(new JLabel(String.format("%.2f", valor)), gbc);
+            gbc.gridy++;
+        });
+
+        pnlEstadisticas.revalidate();
     }
 }
